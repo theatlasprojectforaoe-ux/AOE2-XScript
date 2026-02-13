@@ -1,0 +1,3049 @@
+
+
+#include_drs random_map.def
+
+if LUDIKRIS_MAP override_map_size 350
+	#define GIGANTIC_MAP
+elseif GIGANTIC_MAP override_map_size 300
+elseif HUGE_MAP override_map_size 256
+elseif LARGE_MAP override_map_size 225
+elseif MEDIUM_MAP override_map_size 190
+elseif SMALL_MAP override_map_size 170
+elseif TINY_MAP override_map_size 150
+endif
+
+
+start_random
+percent_chance 40
+#const MAINLAND 0 /* grass */
+percent_chance 20
+#const MAINLAND 9 /* grass3 */
+percent_chance 20
+#const MAINLAND 6 /* dirt */
+#define DRYLAND
+percent_chance 10
+#const MAINLAND 100 /* grass dry */ 
+#define DRYLAND
+#define SAVANNAHLAND
+percent_chance 10
+#const MAINLAND 76 /* mud */
+#define DRYLAND
+end_random
+
+#const TERRAIN_BLOCKER 1613
+
+start_random
+percent_chance 20
+#const HERDABLE 594
+percent_chance 15
+#const HERDABLE 1245
+percent_chance 15
+#const HERDABLE 833
+percent_chance 15
+#const HERDABLE 1243
+percent_chance 5
+#const HERDABLE 705
+percent_chance 5
+#const HERDABLE 1596
+percent_chance 5
+#const HERDABLE 1142
+percent_chance 20
+#const HERDABLE 1060
+end_random
+
+start_random
+percent_chance 40
+#const BIRD 96
+percent_chance 20
+#const BIRD 1056
+percent_chance 20
+#const BIRD 816
+percent_chance 20
+#const BIRD 1028
+end_random
+
+start_random
+percent_chance 25
+#const BIG_FISH 458
+percent_chance 25
+#const BIG_FISH 457
+percent_chance 25
+#const BIG_FISH 456
+percent_chance 25
+#const BIG_FISH 455
+end_random
+
+start_random
+percent_chance 25
+#const BIG_FISH2 458
+percent_chance 25
+#const BIG_FISH2 457
+percent_chance 25
+#const BIG_FISH2 456
+percent_chance 25
+#const BIG_FISH2 455
+end_random
+
+
+if DRYLAND
+	start_random
+	percent_chance 30
+	#const SMALL_HUNT 65
+	percent_chance 35
+	#const SMALL_HUNT 1026
+	percent_chance 35
+	#const SMALL_HUNT 1019
+	end_random
+else
+	start_random
+	percent_chance 60
+	#const SMALL_HUNT 65
+	percent_chance 40
+	#const SMALL_HUNT 1239
+	end_random
+endif
+
+if DRYLAND
+	start_random
+	percent_chance 30
+	#const LARGE_HUNT 48
+	percent_chance 35
+	#const LARGE_HUNT 936
+	percent_chance 35
+	#const LARGE_HUNT 1139
+	end_random
+else
+	#const LARGE_HUNT 48
+endif
+
+// Include XS script for hunting wolves
+#includeXS The_Atlas_Project.xs
+
+<PLAYER_SETUP>
+random_placement 
+nomad_resources
+force_nomad_treaty
+	ai_info_map_type NOMAD 0 0 0
+
+<LAND_GENERATION>
+base_terrain WATER
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	58	100	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	60	100	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	61	99	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	63	99	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	65	99	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	66	99	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	68	99	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	69	98	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	71	98	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	72	97	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	74	96	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	75	96	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	76	95	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	78	94	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	79	93	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	81	92	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	82	91	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	83	90	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	84	89	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	86	88	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	87	87	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	88	86	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	89	84	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	90	83	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	91	82	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	92	81	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	93	79	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	94	78	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	95	76	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	96	75	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	96	74	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	97	72	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	98	71	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	98	69	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	99	68	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	99	66	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	99	65	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	99	63	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	99	61	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	100	60	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	100	58	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	100	42	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	100	40	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	99	39	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	99	37	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	99	35	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	99	34	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	99	32	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	98	31	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	98	29	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	97	28	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	96	26	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	96	25	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	95	24	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	94	22	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	93	21	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	92	19	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	91	18	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	90	17	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	89	16	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	88	14	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	87	13	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	86	12	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	84	11	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	83	10	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	82	9	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	81	8	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	79	7	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	78	6	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	76	5	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	75	4	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	74	4	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	72	3	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	71	2	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	69	2	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	68	1	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	66	1	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	65	1	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	63	1	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	61	1	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	60	0	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	58	0	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	42	0	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	40	0	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	39	1	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	37	1	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	35	1	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	34	1	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	32	1	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	31	2	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	29	2	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	28	3	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	26	4	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	25	4	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	24	5	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	22	6	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	21	7	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	19	8	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	18	9	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	17	10	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	16	11	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	14	12	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	13	13	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	12	14	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	11	16	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	10	17	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	9	18	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	8	19	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	7	21	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	6	22	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	5	24	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	4	25	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	4	26	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	3	28	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	2	29	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	2	31	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	1	32	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	1	34	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	1	35	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	1	37	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	1	39	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	0	40	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	0	42	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	0	58	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	0	60	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	1	61	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	1	63	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	1	65	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	1	66	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	1	68	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	2	69	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	2	71	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	3	72	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	4	74	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	4	75	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	5	76	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	6	78	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	7	79	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	8	81	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	9	82	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	10	83	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	11	84	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	12	86	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	13	87	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	14	88	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	16	89	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	17	90	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	18	91	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	19	92	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	21	93	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	22	94	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	24	95	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	25	96	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	26	96	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	28	97	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	29	98	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	31	98	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	32	99	}
+create_land {	terrain_type MED_WATER	base_size 3	number_of_tiles 5	land_position 	34	99	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	35	99	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	37	99	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 5	land_position 	39	99	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	40	100	}
+create_land {	terrain_type MED_WATER	base_size 1	number_of_tiles 5	land_position 	42	100	}
+
+/* MED_WATER smoother */
+
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	44	100	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	56	100	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	44	0	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	56	0	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	0	44	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	0	56	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	100	44	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	100	56	}
+
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	46	100	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	54	100	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	46	0	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	54	0	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	0	46	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	0	54	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	100	46	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	100	54	}
+
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	48	100	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	52	100	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	48	0	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	52	0	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	0	48	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	0	52	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	100	48	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	100	52	}
+
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	50	100	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	50	0	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	0	50	}
+create_land {	terrain_type MED_WATER	base_size 2	number_of_tiles 4	land_position 	100	50	}
+
+if GIGANTIC_MAP
+elseif HUGE_MAP
+elseif LARGE_MAP 
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	8	92	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	92	92	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	8	8	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	92	8	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	8	8	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	8	92	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	92	8	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	92	92	}
+else
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	8	92	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	92	92	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	8	8	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	92	8	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	8	8	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	8	92	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	92	8	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	92	92	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	26	100	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	74	100	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	26	0	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	74	0	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	0	26	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	0	74	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	100	26	}
+create_land {	terrain_type MED_WATER	base_size 6	number_of_tiles 0	land_position 	100	74	}
+endif
+
+create_land
+{
+terrain_type	MED_WATER
+base_size		4
+land_percent 100
+land_position 	1	1
+}
+create_land
+{
+terrain_type	MED_WATER
+base_size		4
+land_percent 100
+land_position 	1	99
+}
+create_land
+{
+terrain_type	MED_WATER
+base_size		4
+land_percent 100
+land_position 	99 99
+}
+create_land
+{
+terrain_type	MED_WATER
+base_size		4
+land_percent 100
+land_position 	99	1
+}
+
+create_player_lands
+{
+terrain_type WATER
+if TINY_MAP
+circle_radius 49 0
+else
+circle_radius 50 0
+endif
+number_of_tiles 1
+base_size 1
+}
+
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(5000,10000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif HUGE_MAP
+number_of_tiles rnd(4000,9000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif LARGE_MAP
+number_of_tiles rnd(3500,8500)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif MEDIUM_MAP
+number_of_tiles rnd(3000,7500)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif SMALL_MAP
+number_of_tiles rnd(2500,6000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,7)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif TINY_MAP
+number_of_tiles rnd(2000,5000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(4,7)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+endif
+base_size 1
+top_border 2
+bottom_border 2
+right_border 2
+left_border 2
+start_random
+percent_chance 70
+zone 11
+percent_chance 30
+zone 1
+end_random
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(3000,8000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif HUGE_MAP
+number_of_tiles rnd(2800,7000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif LARGE_MAP
+number_of_tiles rnd(2500,6000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif MEDIUM_MAP
+number_of_tiles rnd(2200,5000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif SMALL_MAP
+number_of_tiles rnd(1800,3500)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,7)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+elseif TINY_MAP
+number_of_tiles rnd(1200,2000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(4,7)
+percent_chance 30
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 40
+other_zone_avoidance_distance 3
+end_random
+endif
+base_size 1
+top_border 2
+left_border 2
+right_border 2
+bottom_border 2
+start_random
+percent_chance 70
+zone 20
+percent_chance 30
+zone 1
+end_random
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(5000,10000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,12)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif HUGE_MAP
+number_of_tiles rnd(4000,9000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,12)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif LARGE_MAP
+number_of_tiles rnd(3500,8500)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,11)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif MEDIUM_MAP
+number_of_tiles rnd(3000,7500)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,10)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif SMALL_MAP
+number_of_tiles rnd(2500,6000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,9)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,5)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif TINY_MAP
+number_of_tiles rnd(2000,5000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+endif
+base_size 1
+top_border 2
+left_border 2
+right_border 2
+bottom_border 2
+start_random
+percent_chance 70
+zone 12
+percent_chance 30
+zone 1
+end_random
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(3000,8000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,12)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif HUGE_MAP
+number_of_tiles rnd(2800,7000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,12)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif LARGE_MAP
+number_of_tiles rnd(2500,6000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,11)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif MEDIUM_MAP
+number_of_tiles rnd(2200,5000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,10)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif SMALL_MAP
+number_of_tiles rnd(1800,3500)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,9)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,5)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif TINY_MAP
+number_of_tiles rnd(1200,2000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(4,8)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,4)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+endif
+base_size 1
+top_border 2
+left_border 2
+right_border 2
+bottom_border 2
+start_random
+percent_chance 70
+zone 21
+percent_chance 30
+zone 1
+end_random
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(5000,10000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,12)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif HUGE_MAP
+number_of_tiles rnd(4000,9000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,12)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif LARGE_MAP
+number_of_tiles rnd(3500,8500)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,11)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif MEDIUM_MAP
+number_of_tiles rnd(3000,7500)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,10)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif SMALL_MAP
+number_of_tiles rnd(2500,6000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(6,9)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,6)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+elseif TINY_MAP
+number_of_tiles rnd(2000,5000)
+start_random 
+percent_chance 30
+other_zone_avoidance_distance rnd(5,8)
+percent_chance 40
+other_zone_avoidance_distance rnd(3,5)
+percent_chance 30
+other_zone_avoidance_distance 3
+end_random
+endif
+base_size 1
+top_border 2
+left_border 2
+right_border 2
+bottom_border 2
+start_random
+percent_chance 70
+zone 13
+percent_chance 30
+zone 1
+end_random
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(5000,10000)
+other_zone_avoidance_distance rnd(4,11)
+elseif HUGE_MAP
+number_of_tiles rnd(4000,9000)
+other_zone_avoidance_distance rnd(4,10)
+elseif LARGE_MAP
+number_of_tiles rnd(3500,8500)
+other_zone_avoidance_distance rnd(4,9)
+elseif MEDIUM_MAP
+number_of_tiles rnd(3000,7500)
+other_zone_avoidance_distance rnd(3,8)
+elseif SMALL_MAP
+number_of_tiles rnd(2500,6000)
+other_zone_avoidance_distance rnd(3,7)
+elseif TINY_MAP
+number_of_tiles rnd(2000,5000)
+other_zone_avoidance_distance rnd(3,6)
+endif
+base_size 1
+top_border 2
+left_border 2
+right_border 2
+bottom_border 2
+start_random
+percent_chance 70
+zone 22
+percent_chance 30
+zone 1
+end_random
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(5000,10000)
+other_zone_avoidance_distance rnd(4,11)
+elseif HUGE_MAP
+number_of_tiles rnd(4000,9000)
+other_zone_avoidance_distance rnd(4,10)
+elseif LARGE_MAP
+number_of_tiles rnd(3500,8500)
+other_zone_avoidance_distance rnd(4,9)
+elseif MEDIUM_MAP
+number_of_tiles rnd(3000,7500)
+other_zone_avoidance_distance rnd(3,8)
+elseif SMALL_MAP
+number_of_tiles rnd(2500,6000)
+other_zone_avoidance_distance rnd(3,7)
+elseif TINY_MAP
+number_of_tiles rnd(2000,5000)
+other_zone_avoidance_distance rnd(3,6)
+endif
+base_size 1
+top_border 2
+left_border 2
+right_border 2
+bottom_border 2
+zone 14
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(2000,8000)
+other_zone_avoidance_distance rnd(4,11)
+elseif HUGE_MAP
+number_of_tiles rnd(1800,7000)
+other_zone_avoidance_distance rnd(4,10)
+elseif LARGE_MAP
+number_of_tiles rnd(1700,6000)
+other_zone_avoidance_distance rnd(4,9)
+elseif MEDIUM_MAP
+number_of_tiles rnd(1500,5000)
+other_zone_avoidance_distance rnd(3,8)
+elseif SMALL_MAP
+number_of_tiles rnd(1000,3500)
+other_zone_avoidance_distance rnd(3,7)
+elseif TINY_MAP
+number_of_tiles rnd(800,2000)
+other_zone_avoidance_distance rnd(3,6)
+endif
+base_size 1
+top_border 2
+left_border 2
+right_border 2
+bottom_border 2
+zone 23
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(500,1000)
+elseif HUGE_MAP
+number_of_tiles rnd(400,900)
+elseif LARGE_MAP
+number_of_tiles rnd(350,850)
+elseif MEDIUM_MAP
+number_of_tiles rnd(300,750)
+elseif SMALL_MAP
+number_of_tiles rnd(250,600)
+elseif TINY_MAP
+number_of_tiles rnd(200,500)
+endif
+base_size 1
+top_border 2
+left_border 2
+right_border 2
+bottom_border 2
+other_zone_avoidance_distance rnd(3,5)
+zone 31
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(500,1000)
+elseif HUGE_MAP
+number_of_tiles rnd(400,900)
+elseif LARGE_MAP
+number_of_tiles rnd(350,850)
+elseif MEDIUM_MAP
+number_of_tiles rnd(300,750)
+elseif SMALL_MAP
+number_of_tiles rnd(250,600)
+elseif TINY_MAP
+number_of_tiles rnd(200,500)
+endif
+base_size 1
+top_border 2
+left_border 2
+right_border 2
+bottom_border 2
+other_zone_avoidance_distance rnd(3,5)
+zone 31
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type WATER
+if GIGANTIC_MAP
+number_of_tiles rnd(0,1000)
+elseif HUGE_MAP
+number_of_tiles rnd(0,900)
+elseif LARGE_MAP
+number_of_tiles rnd(0,850)
+elseif MEDIUM_MAP
+number_of_tiles rnd(0,750)
+elseif SMALL_MAP
+number_of_tiles rnd(0,600)
+elseif TINY_MAP
+number_of_tiles rnd(0,500)
+endif
+base_size 1
+other_zone_avoidance_distance 2
+zone 31
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type WATER
+if GIGANTIC_MAP
+number_of_tiles rnd(0,1000)
+elseif HUGE_MAP
+number_of_tiles rnd(0,900)
+elseif LARGE_MAP
+number_of_tiles rnd(0,850)
+elseif MEDIUM_MAP
+number_of_tiles rnd(0,750)
+elseif SMALL_MAP
+number_of_tiles rnd(0,600)
+elseif TINY_MAP
+number_of_tiles rnd(0,500)
+endif
+base_size 1
+other_zone_avoidance_distance 2
+zone 31
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+create_land
+{
+terrain_type WATER
+if GIGANTIC_MAP
+number_of_tiles rnd(0,3000)
+elseif HUGE_MAP
+number_of_tiles rnd(0,2600)
+elseif LARGE_MAP
+number_of_tiles rnd(0,2400)
+elseif MEDIUM_MAP
+number_of_tiles rnd(0,2000)
+elseif SMALL_MAP
+number_of_tiles rnd(0,1400)
+elseif TINY_MAP
+number_of_tiles rnd(0,1000)
+endif
+base_size 1
+other_zone_avoidance_distance 2
+zone 100
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+
+create_land
+{
+terrain_type WATER
+if GIGANTIC_MAP
+number_of_tiles rnd(0,5000)
+elseif HUGE_MAP
+number_of_tiles rnd(0,3600)
+elseif LARGE_MAP
+number_of_tiles rnd(0,3400)
+elseif MEDIUM_MAP
+number_of_tiles rnd(0,2500)
+elseif SMALL_MAP
+number_of_tiles rnd(0,1700)
+elseif TINY_MAP
+number_of_tiles rnd(0,1000)
+endif
+base_size 1
+other_zone_avoidance_distance 2
+zone 101
+border_fuzziness rnd(12,30)
+clumping_factor rnd(2,18)
+}
+	
+<ELEVATION_GENERATION>
+
+create_elevation rnd(1,3) 
+{
+base_terrain MAINLAND
+enable_balanced_elevation
+if GIGANTIC_MAP
+number_of_clumps rnd(20,60)
+number_of_tiles rnd(3500,7000)
+elseif HUGE_MAP
+number_of_clumps rnd(15,45)
+number_of_tiles rnd(2500,5000)
+elseif LARGE_MAP
+number_of_clumps rnd(11,33)
+number_of_tiles rnd(2000,4000)
+elseif MEDIUM_MAP
+number_of_clumps rnd(9,27)
+number_of_tiles rnd(1600,3200)
+elseif SMALL_MAP
+number_of_clumps rnd(7,21)
+number_of_tiles rnd(1200,2400)
+elseif TINY_MAP
+number_of_clumps rnd(5,15)
+number_of_tiles rnd(800,1600)
+endif
+}
+
+create_elevation 7 
+{
+base_terrain MAINLAND
+enable_balanced_elevation
+if GIGANTIC_MAP
+number_of_clumps rnd(15,30)
+number_of_tiles rnd(1800,3000)
+elseif HUGE_MAP
+number_of_clumps rnd(14,28)
+number_of_tiles rnd(1500,2500)
+elseif LARGE_MAP
+number_of_clumps rnd(12,24)
+number_of_tiles rnd(1000,2000)
+elseif MEDIUM_MAP
+number_of_clumps rnd(10,20)
+number_of_tiles rnd(800,1600)
+elseif SMALL_MAP
+number_of_clumps rnd(8,15)
+number_of_tiles rnd(500,1000)
+elseif TINY_MAP
+number_of_clumps rnd(5,10)
+number_of_tiles rnd(300,600)
+endif
+}
+
+
+<TERRAIN_GENERATION>
+create_terrain DEEP_WATER
+{
+base_terrain MED_WATER
+land_percent 100
+number_of_clumps 9999
+if GIGANTIC_MAP
+spacing_to_other_terrain_types 3
+elseif HUGE_MAP
+spacing_to_other_terrain_types 3
+elseif LARGE_MAP
+spacing_to_other_terrain_types 3
+elseif MEDIUM_MAP
+spacing_to_other_terrain_types 2
+elseif SMALL_MAP
+spacing_to_other_terrain_types 2
+elseif TINY_MAP
+spacing_to_other_terrain_types 2
+endif
+}
+
+create_terrain DLC_BLACK
+{
+base_terrain DEEP_WATER
+land_percent 100
+number_of_clumps 999
+if GIGANTIC_MAP
+spacing_to_other_terrain_types 3
+elseif HUGE_MAP
+spacing_to_other_terrain_types 3
+elseif LARGE_MAP
+spacing_to_other_terrain_types 3
+elseif MEDIUM_MAP
+spacing_to_other_terrain_types 2
+elseif SMALL_MAP
+spacing_to_other_terrain_types 2
+elseif TINY_MAP
+spacing_to_other_terrain_types 2
+endif
+}
+
+/* islands */
+create_terrain MAINLAND
+{
+base_terrain WATER
+land_percent rnd(1,5)
+if GIGANTIC_MAP
+number_of_clumps rnd(1,10)
+spacing_to_other_terrain_types rnd(5,9)
+elseif HUGE_MAP
+number_of_clumps rnd(1,10)
+spacing_to_other_terrain_types rnd(5,9)
+elseif LARGE_MAP
+number_of_clumps rnd(1,8)
+spacing_to_other_terrain_types rnd(4,8)
+elseif MEDIUM_MAP
+number_of_clumps rnd(1,5)
+spacing_to_other_terrain_types rnd(4,7)
+elseif SMALL_MAP
+number_of_clumps rnd(1,4)
+spacing_to_other_terrain_types rnd(4,7)
+elseif TINY_MAP
+number_of_clumps rnd(1,3)
+spacing_to_other_terrain_types rnd(4,7)
+endif
+}
+create_terrain MAINLAND
+{
+base_terrain WATER
+land_percent rnd(1,4)
+if GIGANTIC_MAP
+number_of_clumps rnd(1,10)
+spacing_to_other_terrain_types rnd(5,9)
+elseif HUGE_MAP
+number_of_clumps rnd(1,10)
+spacing_to_other_terrain_types rnd(5,9)
+elseif LARGE_MAP
+number_of_clumps rnd(1,8)
+spacing_to_other_terrain_types rnd(4,8)
+elseif MEDIUM_MAP
+number_of_clumps rnd(1,5)
+spacing_to_other_terrain_types rnd(4,7)
+elseif SMALL_MAP
+number_of_clumps rnd(1,4)
+spacing_to_other_terrain_types rnd(4,7)
+elseif TINY_MAP
+number_of_clumps rnd(1,3)
+spacing_to_other_terrain_types rnd(4,7)
+endif
+}
+create_terrain MAINLAND
+{
+base_terrain WATER
+land_percent rnd(0,5)
+if GIGANTIC_MAP
+number_of_clumps rnd(2,10)
+spacing_to_other_terrain_types rnd(12,16)
+elseif HUGE_MAP
+number_of_clumps rnd(2,10)
+spacing_to_other_terrain_types rnd(12,16)
+elseif LARGE_MAP
+number_of_clumps rnd(2,8)
+spacing_to_other_terrain_types rnd(10,14)
+elseif MEDIUM_MAP
+number_of_clumps rnd(1,7)
+spacing_to_other_terrain_types rnd(9,13)
+elseif SMALL_MAP
+number_of_clumps rnd(1,5)
+spacing_to_other_terrain_types rnd(8,12)
+elseif TINY_MAP
+number_of_clumps rnd(1,4)
+spacing_to_other_terrain_types rnd(7,11)
+endif
+}
+
+
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 30
+number_of_clumps 999
+spacing_to_other_terrain_types 4
+}
+
+/* crossings */
+create_terrain SHALLOW
+{
+base_terrain WATER
+land_percent rnd(2,4)
+if GIGANTIC_MAP
+number_of_clumps rnd(5,50)
+elseif HUGE_MAP
+number_of_clumps rnd(5,30)
+elseif LARGE_MAP
+number_of_clumps rnd(5,25)
+elseif MEDIUM_MAP
+number_of_clumps rnd(5,20)
+elseif SMALL_MAP
+number_of_clumps rnd(5,15)
+elseif TINY_MAP
+number_of_clumps rnd(5,10)
+endif
+set_avoid_player_start_areas 6
+}
+create_terrain DLC_MANGROVESHALLOW
+{
+base_terrain WATER
+land_percent rnd(1,2)
+if GIGANTIC_MAP
+number_of_clumps rnd(10,40)
+elseif HUGE_MAP
+number_of_clumps rnd(8,25)
+elseif LARGE_MAP
+number_of_clumps rnd(7,20)
+elseif MEDIUM_MAP
+number_of_clumps rnd(6,15)
+elseif SMALL_MAP
+number_of_clumps rnd(5,12)
+elseif TINY_MAP
+number_of_clumps rnd(4,10)
+endif
+set_avoid_player_start_areas 6
+}
+
+/* mangrove island */
+
+create_terrain DLC_MANGROVESHALLOW
+{
+base_terrain MED_WATER
+if GIGANTIC_MAP
+number_of_tiles rnd(300,400)
+number_of_clumps rnd(2,4)
+elseif HUGE_MAP
+number_of_tiles rnd(250,300)
+number_of_clumps rnd(2,4)
+elseif LARGE_MAP
+number_of_tiles rnd(200,250)
+number_of_clumps rnd(1,4)
+elseif MEDIUM_MAP
+number_of_tiles rnd(180,220)
+number_of_clumps rnd(1,4)
+elseif SMALL_MAP
+number_of_tiles rnd(150,190)
+number_of_clumps rnd(1,3)
+elseif TINY_MAP
+number_of_tiles rnd(120,150)
+number_of_clumps rnd(1,3)
+endif
+spacing_to_other_terrain_types 4
+set_avoid_player_start_areas 6
+clumping_factor rnd(10,15)
+}
+create_terrain DLC_MANGROVESHALLOW
+{
+base_terrain MED_WATER
+if GIGANTIC_MAP
+number_of_tiles rnd(500,700)
+number_of_clumps rnd(2,4)
+elseif HUGE_MAP
+number_of_tiles rnd(500,700)
+number_of_clumps rnd(2,4)
+elseif LARGE_MAP
+number_of_tiles rnd(400,500)
+number_of_clumps rnd(1,4)
+elseif MEDIUM_MAP
+number_of_tiles rnd(350,450)
+number_of_clumps rnd(1,4)
+elseif SMALL_MAP
+number_of_tiles rnd(300,400)
+number_of_clumps rnd(1,3)
+elseif TINY_MAP
+number_of_tiles rnd(240,300)
+number_of_clumps rnd(1,3)
+endif
+spacing_to_other_terrain_types 2
+set_avoid_player_start_areas 6
+clumping_factor rnd(10,15)
+}
+
+create_terrain WATER
+{
+base_terrain MED_WATER
+land_percent 30
+number_of_clumps 99
+}
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 10
+number_of_clumps 99
+spacing_to_other_terrain_types 4
+clumping_factor 1
+terrain_mask 1
+}
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 10
+number_of_clumps 99
+spacing_to_other_terrain_types 3
+clumping_factor 1
+}
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 10
+number_of_clumps 99
+spacing_to_other_terrain_types 2
+clumping_factor 1
+terrain_mask 2
+}
+create_terrain WATER
+{
+base_terrain MED_WATER
+land_percent 10
+number_of_clumps 99
+clumping_factor 1
+terrain_mask 2
+}
+create_terrain MED_WATER
+{
+base_terrain DEEP_WATER
+land_percent 1
+number_of_clumps 99
+clumping_factor 1
+}
+create_terrain MED_WATER
+{
+base_terrain WATER
+land_percent 1
+number_of_clumps 99
+clumping_factor 1
+terrain_mask 1
+}
+create_terrain WATER
+{
+base_terrain DEEP_WATER
+land_percent 1
+number_of_clumps 99
+clumping_factor 1
+terrain_mask 1
+}
+create_terrain MED_WATER
+{
+base_terrain DEEP_WATER
+land_percent 1
+number_of_clumps 99
+clumping_factor 1
+terrain_mask 2
+}
+
+/* lakes */
+create_terrain WATER
+{
+base_terrain MAINLAND
+land_percent rnd(1,5)
+if GIGANTIC_MAP
+number_of_clumps rnd(2,36)
+elseif HUGE_MAP
+number_of_clumps rnd(2,30)
+elseif LARGE_MAP
+number_of_clumps rnd(2,20)
+elseif MEDIUM_MAP
+number_of_clumps rnd(2,16)
+elseif SMALL_MAP
+number_of_clumps rnd(1,12)
+elseif TINY_MAP
+number_of_clumps rnd(1,10)
+endif
+height_limits 0 0
+set_flat_terrain_only
+spacing_to_other_terrain_types 1
+}
+
+/* beaches */
+create_terrain LEAVES
+{
+base_terrain MAINLAND
+land_percent 100
+number_of_clumps 999
+spacing_to_other_terrain_types 2
+}
+create_terrain LEAVES
+{
+base_terrain MAINLAND
+land_percent 100
+number_of_clumps 999
+spacing_to_other_terrain_types 2
+}
+create_terrain BEACH
+{
+base_terrain MAINLAND
+land_percent rnd(1,2)
+if GIGANTIC_MAP
+number_of_clumps rnd(100,300)
+elseif HUGE_MAP
+number_of_clumps rnd(100,300)
+elseif LARGE_MAP
+number_of_clumps rnd(80,250)
+elseif MEDIUM_MAP
+number_of_clumps rnd(60,220)
+elseif SMALL_MAP
+number_of_clumps rnd(40,150)
+elseif TINY_MAP
+number_of_clumps rnd(30,100)
+endif
+height_limits 0 0
+}
+create_terrain DESERT
+{
+base_terrain MAINLAND
+land_percent rnd(2,3)
+if GIGANTIC_MAP
+number_of_clumps rnd(100,300)
+elseif HUGE_MAP
+number_of_clumps rnd(100,300)
+elseif LARGE_MAP
+number_of_clumps rnd(80,250)
+elseif MEDIUM_MAP
+number_of_clumps rnd(60,220)
+elseif SMALL_MAP
+number_of_clumps rnd(40,150)
+elseif TINY_MAP
+number_of_clumps rnd(30,100)
+endif
+height_limits 0 0
+}
+create_terrain SHALLOW
+{
+base_terrain MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(200,300)
+number_of_clumps rnd(50,300)
+elseif HUGE_MAP
+number_of_tiles rnd(160,250)
+number_of_clumps rnd(40,250)
+elseif LARGE_MAP
+number_of_tiles rnd(120,220)
+number_of_clumps rnd(30,220)
+elseif MEDIUM_MAP
+number_of_tiles rnd(80,150)
+number_of_clumps rnd(20,150)
+elseif SMALL_MAP
+number_of_tiles rnd(60,100)
+number_of_clumps rnd(10,100)
+elseif TINY_MAP
+number_of_tiles rnd(45,80)
+number_of_clumps rnd(10,80)
+endif
+height_limits 0 0
+}
+create_terrain MAINLAND
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 9999
+}
+create_terrain MAINLAND
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 9999
+}
+
+/* second layer */
+create_terrain LEAVES
+{
+base_terrain MAINLAND
+land_percent 100
+number_of_clumps 999
+spacing_to_other_terrain_types rnd(3,4)
+}
+create_terrain LEAVES
+{
+base_terrain MAINLAND
+land_percent 100
+number_of_clumps 999
+spacing_to_other_terrain_types rnd(3,4)
+}
+create_terrain DESERT
+{
+base_terrain MAINLAND
+land_percent 1
+if GIGANTIC_MAP
+number_of_clumps rnd(50,100)
+elseif HUGE_MAP
+number_of_clumps rnd(50,100)
+elseif LARGE_MAP
+number_of_clumps rnd(40,80)
+elseif MEDIUM_MAP
+number_of_clumps rnd(30,60)
+elseif SMALL_MAP
+number_of_clumps rnd(20,40)
+elseif TINY_MAP
+number_of_clumps rnd(15,30)
+endif
+height_limits 0 0
+}
+create_terrain DESERT
+{
+base_terrain MAINLAND
+land_percent 1
+if GIGANTIC_MAP
+number_of_clumps rnd(10,30)
+elseif HUGE_MAP
+number_of_clumps rnd(10,30)
+elseif LARGE_MAP
+number_of_clumps rnd(8,25)
+elseif MEDIUM_MAP
+number_of_clumps rnd(6,22)
+elseif SMALL_MAP
+number_of_clumps rnd(4,15)
+elseif TINY_MAP
+number_of_clumps rnd(3,10)
+endif
+height_limits 0 0
+}
+create_terrain MAINLAND
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 9999
+}
+create_terrain MAINLAND
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 9999
+}
+
+/* deserts */
+create_terrain DESERT
+{
+base_terrain MAINLAND
+land_percent rnd(2,4)
+number_of_clumps rnd(1,3)
+set_flat_terrain_only
+terrain_mask 2
+height_limits 0 3
+clumping_factor rnd(12,25)
+}
+create_terrain DESERT
+{
+base_terrain MAINLAND
+land_percent rnd(1,5)
+if GIGANTIC_MAP
+number_of_clumps rnd(5,30)
+elseif HUGE_MAP
+number_of_clumps rnd(5,30)
+elseif LARGE_MAP
+number_of_clumps rnd(4,25)
+elseif MEDIUM_MAP
+number_of_clumps rnd(3,22)
+elseif SMALL_MAP
+number_of_clumps rnd(2,15)
+elseif TINY_MAP
+number_of_clumps rnd(2,10)
+endif
+set_flat_terrain_only
+terrain_mask 2
+height_limits 0 2
+clumping_factor rnd(12,25)
+}
+create_terrain LEAVES
+{
+base_terrain DESERT
+land_percent 100
+number_of_clumps 9999
+spacing_to_other_terrain_types 1
+}
+create_terrain LEAVES
+{
+base_terrain DESERT
+land_percent 100
+number_of_clumps 9999
+spacing_to_other_terrain_types 1
+}
+create_terrain DESERT
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 9999
+}
+create_terrain DESERT
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 9999
+}
+create_terrain MAINLAND
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 9999
+}
+
+/* tropic zone */
+if DRYLAND
+create_terrain GRASS
+{
+else
+create_terrain DLC_JUNGLEGRASS
+{
+endif
+base_terrain MAINLAND
+land_percent rnd(5,7)
+if GIGANTIC_MAP
+number_of_clumps rnd(10,20)
+elseif HUGE_MAP
+number_of_clumps rnd(10,20)
+elseif LARGE_MAP
+number_of_clumps rnd(8,18)
+elseif MEDIUM_MAP
+number_of_clumps rnd(6,15)
+elseif SMALL_MAP
+number_of_clumps rnd(4,13)
+elseif TINY_MAP
+number_of_clumps rnd(3,8)
+endif
+height_limits 0 3
+clumping_factor rnd(12,25)
+spacing_to_other_terrain_types rnd(0,2)
+}
+
+create_terrain GRASS2
+{
+if DRYLAND
+base_terrain GRASS
+else
+base_terrain DLC_JUNGLEGRASS
+endif
+land_percent 1
+if GIGANTIC_MAP
+number_of_clumps rnd(20,100)
+elseif HUGE_MAP
+number_of_clumps rnd(20,100)
+elseif LARGE_MAP
+number_of_clumps rnd(15,80)
+elseif MEDIUM_MAP
+number_of_clumps rnd(12,65)
+elseif SMALL_MAP
+number_of_clumps rnd(10,50)
+elseif TINY_MAP
+number_of_clumps rnd(8,40)
+endif
+terrain_mask 1
+}
+
+create_terrain DLC_JUNGLELEAVES
+{
+if DRYLAND
+base_terrain GRASS
+else
+base_terrain DLC_JUNGLEGRASS
+endif
+land_percent 1
+if GIGANTIC_MAP
+number_of_clumps rnd(20,100)
+elseif HUGE_MAP
+number_of_clumps rnd(20,100)
+elseif LARGE_MAP
+number_of_clumps rnd(15,80)
+elseif MEDIUM_MAP
+number_of_clumps rnd(12,65)
+elseif SMALL_MAP
+number_of_clumps rnd(10,50)
+elseif TINY_MAP
+number_of_clumps rnd(8,40)
+endif
+terrain_mask 1
+}
+
+/* savannah zone */
+create_terrain DLC_SAVANNAH
+{
+base_terrain MAINLAND
+land_percent rnd(3,7)
+if GIGANTIC_MAP
+number_of_clumps rnd(5,15)
+elseif HUGE_MAP
+number_of_clumps rnd(5,15)
+elseif LARGE_MAP
+number_of_clumps rnd(4,14)
+elseif MEDIUM_MAP
+number_of_clumps rnd(4,11)
+elseif SMALL_MAP
+number_of_clumps rnd(3,7)
+elseif TINY_MAP
+number_of_clumps rnd(3,5)
+endif
+height_limits 0 3
+terrain_mask 2
+clumping_factor rnd(12,25)
+spacing_to_other_terrain_types rnd(0,2)
+}
+create_terrain DIRT3
+{
+base_terrain DLC_SAVANNAH
+land_percent 100
+number_of_clumps 999
+spacing_to_other_terrain_types 1
+}
+create_terrain DLC_SAVANNAH
+{
+base_terrain DIRT3
+land_percent 100
+number_of_clumps 999
+}
+create_terrain DLC_DIRT4
+{
+base_terrain DLC_SAVANNAH
+land_percent 100
+number_of_clumps 999
+terrain_mask 1
+}
+
+
+/* hill tops */
+create_terrain SNOW
+{
+base_terrain MAINLAND
+land_percent rnd(2,4)
+if GIGANTIC_MAP
+number_of_clumps rnd(10,50)
+elseif HUGE_MAP
+number_of_clumps rnd(10,50)
+elseif LARGE_MAP
+number_of_clumps rnd(8,40)
+elseif MEDIUM_MAP
+number_of_clumps rnd(6,30)
+elseif SMALL_MAP
+number_of_clumps rnd(4,25)
+elseif TINY_MAP
+number_of_clumps rnd(3,20)
+endif
+height_limits 5 7
+terrain_mask 2
+clumping_factor rnd(12,25)
+spacing_to_other_terrain_types 4
+}
+create_terrain SNOW
+{
+base_terrain MAINLAND
+land_percent rnd(1,2)
+if GIGANTIC_MAP
+number_of_clumps rnd(10,50)
+elseif HUGE_MAP
+number_of_clumps rnd(10,50)
+elseif LARGE_MAP
+number_of_clumps rnd(8,40)
+elseif MEDIUM_MAP
+number_of_clumps rnd(6,30)
+elseif SMALL_MAP
+number_of_clumps rnd(4,25)
+elseif TINY_MAP
+number_of_clumps rnd(3,20)
+endif
+height_limits 4 6
+terrain_mask 2
+clumping_factor rnd(12,25)
+spacing_to_other_terrain_types 3
+}
+create_terrain LEAVES
+{
+base_terrain SNOW
+land_percent 100
+number_of_clumps 9999
+spacing_to_other_terrain_types 1
+height_limits 5 7
+}
+create_terrain SNOW
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 9999
+}
+create_terrain ICE
+{
+base_terrain SNOW
+if GIGANTIC_MAP
+number_of_tiles rnd(40,80)
+number_of_clumps rnd(2,10)
+elseif HUGE_MAP
+number_of_tiles rnd(35,70)
+number_of_clumps rnd(2,9)
+elseif LARGE_MAP
+number_of_tiles rnd(30,60)
+number_of_clumps rnd(2,8)
+elseif MEDIUM_MAP
+number_of_tiles rnd(25,50)
+number_of_clumps rnd(1,7)
+elseif SMALL_MAP
+number_of_tiles rnd(20,40)
+number_of_clumps rnd(1,6)
+elseif TINY_MAP
+number_of_tiles rnd(15,30)
+number_of_clumps rnd(1,5)
+endif
+height_limits 7 7
+set_flat_terrain_only
+spacing_to_other_terrain_types 2
+clumping_factor rnd(12,25)
+}
+create_terrain LEAVES
+{
+base_terrain SNOW
+if GIGANTIC_MAP
+number_of_tiles rnd(50,200)
+number_of_clumps rnd(10,30)
+elseif HUGE_MAP
+number_of_tiles rnd(50,200)
+number_of_clumps rnd(10,30)
+elseif LARGE_MAP
+number_of_tiles rnd(40,180)
+number_of_clumps rnd(8,25)
+elseif MEDIUM_MAP
+number_of_tiles rnd(33,150)
+number_of_clumps rnd(6,20)
+elseif SMALL_MAP
+number_of_tiles rnd(22,100)
+number_of_clumps rnd(5,15)
+elseif TINY_MAP
+number_of_tiles rnd(18,80)
+number_of_clumps rnd(4,12)
+endif
+height_limits 5 7
+set_flat_terrain_only
+terrain_mask 1
+clumping_factor rnd(12,25)
+}
+create_terrain ICE
+{
+base_terrain SNOW
+if GIGANTIC_MAP
+number_of_tiles rnd(20,100)
+number_of_clumps rnd(10,20)
+elseif HUGE_MAP
+number_of_tiles rnd(20,100)
+number_of_clumps rnd(10,20)
+elseif LARGE_MAP
+number_of_tiles rnd(15,80)
+number_of_clumps rnd(8,18)
+elseif MEDIUM_MAP
+number_of_tiles rnd(12,70)
+number_of_clumps rnd(6,15)
+elseif SMALL_MAP
+number_of_tiles rnd(10,50)
+number_of_clumps rnd(5,12)
+elseif TINY_MAP
+number_of_tiles rnd(8,40)
+number_of_clumps rnd(3,10)
+endif
+height_limits 7 7
+set_flat_terrain_only
+spacing_to_other_terrain_types 2
+terrain_mask 1
+clumping_factor rnd(12,25)
+}
+
+create_terrain MAINLAND
+{
+base_terrain LEAVES
+land_percent 100
+number_of_clumps 9999
+}
+
+/* forests */
+create_terrain PALM_DESERT
+{
+base_terrain DESERT
+if GIGANTIC_MAP
+number_of_tiles rnd(120,220)
+number_of_clumps rnd(5,15)
+spacing_to_other_terrain_types 7
+elseif HUGE_MAP
+number_of_tiles rnd(120,220)
+number_of_clumps rnd(5,15)
+spacing_to_other_terrain_types 7
+elseif LARGE_MAP
+number_of_tiles rnd(100,200)
+number_of_clumps rnd(4,12)
+spacing_to_other_terrain_types 6
+elseif MEDIUM_MAP
+number_of_tiles rnd(80,170)
+number_of_clumps rnd(3,9)
+spacing_to_other_terrain_types 5
+elseif SMALL_MAP
+number_of_tiles rnd(70,140)
+number_of_clumps rnd(2,7)
+spacing_to_other_terrain_types 5
+elseif TINY_MAP
+number_of_tiles rnd(50,100)
+number_of_clumps rnd(2,5)
+spacing_to_other_terrain_types 4
+endif
+clumping_factor rnd(15,24)
+}
+create_terrain PALM_DESERT
+{
+base_terrain DESERT
+if GIGANTIC_MAP
+number_of_tiles rnd(100,220)
+number_of_clumps rnd(20,40)
+elseif HUGE_MAP
+number_of_tiles rnd(100,220)
+number_of_clumps rnd(20,40)
+elseif LARGE_MAP
+number_of_tiles rnd(80,200)
+number_of_clumps rnd(16,33)
+elseif MEDIUM_MAP
+number_of_tiles rnd(60,140)
+number_of_clumps rnd(12,25)
+elseif SMALL_MAP
+number_of_tiles rnd(50,120)
+number_of_clumps rnd(10,20)
+elseif TINY_MAP
+number_of_tiles rnd(40,80)
+number_of_clumps rnd(8,18)
+endif
+spacing_to_other_terrain_types 1
+clumping_factor rnd(15,24)
+}
+create_terrain SNOW_FOREST
+{
+base_terrain SNOW
+if GIGANTIC_MAP
+number_of_tiles rnd(50,200)
+number_of_clumps rnd(5,20)
+elseif HUGE_MAP
+number_of_tiles rnd(50,200)
+number_of_clumps rnd(5,20)
+elseif LARGE_MAP
+number_of_tiles rnd(40,170)
+number_of_clumps rnd(4,17)
+elseif MEDIUM_MAP
+number_of_tiles rnd(30,130)
+number_of_clumps rnd(3,12)
+elseif SMALL_MAP
+number_of_tiles rnd(25,100)
+number_of_clumps rnd(2,10)
+elseif TINY_MAP
+number_of_tiles rnd(20,80)
+number_of_clumps rnd(2,8)
+endif
+spacing_to_other_terrain_types 1
+clumping_factor rnd(15,24)
+}
+
+create_terrain PINE_FOREST
+{
+base_terrain MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(200,400)
+number_of_clumps rnd(10,20)
+elseif HUGE_MAP
+number_of_tiles rnd(200,400)
+number_of_clumps rnd(10,20)
+elseif LARGE_MAP
+number_of_tiles rnd(140,300)
+number_of_clumps rnd(8,15)
+elseif MEDIUM_MAP
+number_of_tiles rnd(100,200)
+number_of_clumps rnd(7,12)
+elseif SMALL_MAP
+number_of_tiles rnd(80,150)
+number_of_clumps rnd(5,10)
+elseif TINY_MAP
+number_of_tiles rnd(50,100)
+number_of_clumps rnd(4,8)
+endif
+height_limits 2 7
+clumping_factor rnd(15,24)
+}
+
+create_terrain DLC_RAINFOREST
+{
+if DRYLAND
+base_terrain GRASS
+else
+base_terrain DLC_JUNGLEGRASS
+endif
+if GIGANTIC_MAP
+number_of_tiles rnd(800,1200)
+number_of_clumps rnd(5,10)
+elseif HUGE_MAP
+number_of_tiles rnd(800,1200)
+number_of_clumps rnd(5,10)
+elseif LARGE_MAP
+number_of_tiles rnd(550,900)
+number_of_clumps rnd(4,8)
+elseif MEDIUM_MAP
+number_of_tiles rnd(400,700)
+number_of_clumps rnd(3,7)
+elseif SMALL_MAP
+number_of_tiles rnd(300,600)
+number_of_clumps rnd(3,6)
+elseif TINY_MAP
+number_of_tiles rnd(200,350)
+number_of_clumps rnd(2,4)
+endif
+spacing_to_other_terrain_types 1
+height_limits 0 2
+clumping_factor rnd(15,24)
+}
+create_terrain JUNGLE
+{
+base_terrain DLC_JUNGLEGRASS
+if GIGANTIC_MAP
+number_of_tiles rnd(100,300)
+number_of_clumps rnd(5,10)
+elseif HUGE_MAP
+number_of_tiles rnd(100,300)
+number_of_clumps rnd(5,10)
+elseif LARGE_MAP
+number_of_tiles rnd(80,250)
+number_of_clumps rnd(4,8)
+elseif MEDIUM_MAP
+number_of_tiles rnd(70,200)
+number_of_clumps rnd(3,7)
+elseif SMALL_MAP
+number_of_tiles rnd(50,150)
+number_of_clumps rnd(3,6)
+elseif TINY_MAP
+number_of_tiles rnd(30,100)
+number_of_clumps rnd(2,4)
+endif
+spacing_to_other_terrain_types 1
+height_limits 0 2
+clumping_factor rnd(15,24)
+}
+
+create_terrain DLC_ACACIAFOREST
+{
+base_terrain DLC_SAVANNAH
+
+if GIGANTIC_MAP
+number_of_tiles rnd(400,800)
+number_of_clumps rnd(20,40)
+elseif HUGE_MAP
+number_of_tiles rnd(400,800)
+number_of_clumps rnd(20,40)
+elseif LARGE_MAP
+number_of_tiles rnd(280,600)
+number_of_clumps rnd(16,30)
+elseif MEDIUM_MAP
+number_of_tiles rnd(200,400)
+number_of_clumps rnd(15,25)
+elseif SMALL_MAP
+number_of_tiles rnd(160,300)
+number_of_clumps rnd(10,20)
+elseif TINY_MAP
+number_of_tiles rnd(100,200)
+number_of_clumps rnd(7,15)
+endif
+spacing_to_other_terrain_types 2
+clumping_factor rnd(15,24)
+}
+create_terrain FOREST
+{
+base_terrain MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(500,800)
+number_of_clumps rnd(8,12)
+spacing_to_other_terrain_types 7
+elseif HUGE_MAP
+number_of_tiles rnd(500,800)
+number_of_clumps rnd(8,12)
+spacing_to_other_terrain_types 7
+elseif LARGE_MAP
+number_of_tiles rnd(400,600)
+number_of_clumps rnd(7,11)
+spacing_to_other_terrain_types 6
+elseif MEDIUM_MAP
+number_of_tiles rnd(330,500)
+number_of_clumps rnd(6,10)
+spacing_to_other_terrain_types 5
+elseif SMALL_MAP
+number_of_tiles rnd(200,350)
+number_of_clumps rnd(5,9)
+spacing_to_other_terrain_types 5
+elseif TINY_MAP
+number_of_tiles rnd(150,250)
+number_of_clumps rnd(5,7)
+spacing_to_other_terrain_types 4
+endif
+clumping_factor rnd(15,24)
+}
+
+create_terrain FOREST
+{
+base_terrain MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(700,900)
+number_of_clumps rnd(20,40)
+elseif HUGE_MAP
+number_of_tiles rnd(700,900)
+number_of_clumps rnd(20,40)
+elseif LARGE_MAP
+number_of_tiles rnd(500,600)
+number_of_clumps rnd(16,30)
+elseif MEDIUM_MAP
+number_of_tiles rnd(370,400)
+number_of_clumps rnd(15,25)
+elseif SMALL_MAP
+number_of_tiles rnd(220,320)
+number_of_clumps rnd(10,20)
+elseif TINY_MAP
+number_of_tiles rnd(170,250)
+number_of_clumps rnd(8,15)
+endif
+spacing_to_other_terrain_types 1
+clumping_factor rnd(15,24)
+}
+create_terrain FOREST
+{
+base_terrain MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(100,200)
+number_of_clumps rnd(10,12)
+spacing_to_other_terrain_types 3
+elseif HUGE_MAP
+number_of_tiles rnd(100,200)
+number_of_clumps rnd(10,12)
+spacing_to_other_terrain_types 3
+elseif LARGE_MAP
+number_of_tiles rnd(80,170)
+number_of_clumps rnd(8,10)
+spacing_to_other_terrain_types 3
+elseif MEDIUM_MAP
+number_of_tiles rnd(70,150)
+number_of_clumps rnd(7,9)
+spacing_to_other_terrain_types 2
+elseif SMALL_MAP
+number_of_tiles rnd(50,100)
+number_of_clumps rnd(5,8)
+spacing_to_other_terrain_types 2
+elseif TINY_MAP
+number_of_tiles rnd(40,80)
+number_of_clumps rnd(5,7)
+spacing_to_other_terrain_types 2
+endif
+clumping_factor rnd(15,24)
+}
+
+if SAVANNAHLAND
+create_terrain DLC_DRAGONFOREST
+{
+base_terrain DLC_SAVANNAH
+if GIGANTIC_MAP
+number_of_tiles rnd(700,900)
+number_of_clumps rnd(20,40)
+elseif HUGE_MAP
+number_of_tiles rnd(700,900)
+number_of_clumps rnd(20,40)
+elseif LARGE_MAP
+number_of_tiles rnd(500,600)
+number_of_clumps rnd(16,30)
+elseif MEDIUM_MAP
+number_of_tiles rnd(370,400)
+number_of_clumps rnd(15,25)
+elseif SMALL_MAP
+number_of_tiles rnd(220,320)
+number_of_clumps rnd(10,20)
+elseif TINY_MAP
+number_of_tiles rnd(170,250)
+number_of_clumps rnd(8,15)
+endif
+spacing_to_other_terrain_types 4
+clumping_factor rnd(15,24)
+}
+create_terrain DLC_DRAGONFOREST
+{
+base_terrain DLC_SAVANNAH
+if GIGANTIC_MAP
+number_of_tiles rnd(250,500)
+number_of_clumps rnd(20,40)
+elseif HUGE_MAP
+number_of_tiles rnd(250,500)
+number_of_clumps rnd(20,40)
+elseif LARGE_MAP
+number_of_tiles rnd(200,400)
+number_of_clumps rnd(16,30)
+elseif MEDIUM_MAP
+number_of_tiles rnd(150,300)
+number_of_clumps rnd(15,25)
+elseif SMALL_MAP
+number_of_tiles rnd(100,200)
+number_of_clumps rnd(10,20)
+elseif TINY_MAP
+number_of_tiles rnd(80,160)
+number_of_clumps rnd(8,15)
+endif
+spacing_to_other_terrain_types 4
+clumping_factor rnd(15,24)
+}
+endif
+
+
+create_terrain DLC_MANGROVEFOREST
+{
+base_terrain DLC_MANGROVESHALLOW
+if GIGANTIC_MAP
+number_of_tiles rnd(80,200)
+number_of_clumps rnd(8,25)
+elseif HUGE_MAP
+number_of_tiles rnd(70,150)
+number_of_clumps rnd(7,22)
+elseif LARGE_MAP
+number_of_tiles rnd(50,100)
+number_of_clumps rnd(5,20)
+elseif MEDIUM_MAP
+number_of_tiles rnd(40,75)
+number_of_clumps rnd(4,18)
+elseif SMALL_MAP
+number_of_tiles rnd(30,60)
+number_of_clumps rnd(4,16)
+elseif TINY_MAP
+number_of_tiles rnd(20,50)
+number_of_clumps rnd(4,14)
+endif
+clumping_factor rnd(15,24)
+spacing_to_other_terrain_types 0
+}
+create_terrain DLC_MANGROVEFOREST
+{
+base_terrain DLC_MANGROVESHALLOW
+if GIGANTIC_MAP
+number_of_tiles rnd(80,200)
+number_of_clumps rnd(8,25)
+elseif HUGE_MAP
+number_of_tiles rnd(70,150)
+number_of_clumps rnd(7,22)
+elseif LARGE_MAP
+number_of_tiles rnd(50,100)
+number_of_clumps rnd(5,20)
+elseif MEDIUM_MAP
+number_of_tiles rnd(40,75)
+number_of_clumps rnd(4,18)
+elseif SMALL_MAP
+number_of_tiles rnd(30,60)
+number_of_clumps rnd(4,16)
+elseif TINY_MAP
+number_of_tiles rnd(20,50)
+number_of_clumps rnd(4,14)
+endif
+clumping_factor rnd(15,24)
+spacing_to_other_terrain_types rnd(1,4)
+}
+
+create_terrain BEACH
+{
+base_terrain DLC_MANGROVESHALLOW
+if GIGANTIC_MAP
+number_of_tiles rnd(150,500)
+number_of_clumps rnd(12,25)
+elseif HUGE_MAP
+number_of_tiles rnd(100,400)
+number_of_clumps rnd(10,20)
+elseif LARGE_MAP
+number_of_tiles rnd(80,300)
+number_of_clumps rnd(8,15)
+elseif MEDIUM_MAP
+number_of_tiles rnd(70,250)
+number_of_clumps rnd(7,12)
+elseif SMALL_MAP
+number_of_tiles rnd(50,200)
+number_of_clumps rnd(5,10)
+elseif TINY_MAP
+number_of_tiles rnd(40,150)
+number_of_clumps rnd(4,8)
+endif
+}
+
+/* final terrain mixing */
+create_terrain GRASS3
+{
+base_terrain MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(1000,2000)
+number_of_clumps rnd(20,80)
+elseif HUGE_MAP
+number_of_tiles rnd(1000,2000)
+number_of_clumps rnd(20,80)
+elseif LARGE_MAP
+number_of_tiles rnd(800,1600)
+number_of_clumps rnd(16,60)
+elseif MEDIUM_MAP
+number_of_tiles rnd(600,1200)
+number_of_clumps rnd(14,48)
+elseif SMALL_MAP
+number_of_tiles rnd(500,1000)
+number_of_clumps rnd(10,40)
+elseif TINY_MAP
+number_of_tiles rnd(30,600)
+number_of_clumps rnd(8,32)
+endif
+terrain_mask 1
+clumping_factor rnd(15,24)
+}
+create_terrain GRASS2
+{
+base_terrain GRASS
+if GIGANTIC_MAP
+number_of_tiles rnd(100,400)
+number_of_clumps rnd(10,20)
+elseif HUGE_MAP
+number_of_tiles rnd(100,400)
+number_of_clumps rnd(10,20)
+elseif LARGE_MAP
+number_of_tiles rnd(80,300)
+number_of_clumps rnd(8,15)
+elseif MEDIUM_MAP
+number_of_tiles rnd(70,250)
+number_of_clumps rnd(7,12)
+elseif SMALL_MAP
+number_of_tiles rnd(50,200)
+number_of_clumps rnd(5,10)
+elseif TINY_MAP
+number_of_tiles rnd(40,150)
+number_of_clumps rnd(4,8)
+endif
+terrain_mask 1
+clumping_factor rnd(15,24)
+}
+create_terrain DIRT
+{
+base_terrain DESERT
+if GIGANTIC_MAP
+number_of_tiles rnd(300,600)
+number_of_clumps rnd(40,70)
+elseif HUGE_MAP
+number_of_tiles rnd(300,600)
+number_of_clumps rnd(40,70)
+elseif LARGE_MAP
+number_of_tiles rnd(250,500)
+number_of_clumps rnd(30,50)
+elseif MEDIUM_MAP
+number_of_tiles rnd(200,400)
+number_of_clumps rnd(20,35)
+elseif SMALL_MAP
+number_of_tiles rnd(150,300)
+number_of_clumps rnd(15,30)
+elseif TINY_MAP
+number_of_tiles rnd(120,250)
+number_of_clumps rnd(12,24)
+endif
+terrain_mask 1
+clumping_factor rnd(15,24)
+}
+create_terrain DIRT
+{
+base_terrain DESERT
+if GIGANTIC_MAP
+number_of_tiles rnd(300,500)
+number_of_clumps rnd(10,15)
+elseif HUGE_MAP
+number_of_tiles rnd(300,500)
+number_of_clumps rnd(10,15)
+elseif LARGE_MAP
+number_of_tiles rnd(220,400)
+number_of_clumps rnd(8,13)
+elseif MEDIUM_MAP
+number_of_tiles rnd(200,300)
+number_of_clumps rnd(7,12)
+elseif SMALL_MAP
+number_of_tiles rnd(150,250)
+number_of_clumps rnd(6,10)
+elseif TINY_MAP
+number_of_tiles rnd(120,200)
+number_of_clumps rnd(5,8)
+endif
+terrain_mask 1
+clumping_factor rnd(15,24)
+}
+create_terrain DIRT
+{
+base_terrain PALM_DESERT
+if GIGANTIC_MAP
+number_of_tiles rnd(300,500)
+number_of_clumps rnd(20,35)
+elseif HUGE_MAP
+number_of_tiles rnd(300,500)
+number_of_clumps rnd(20,35)
+elseif LARGE_MAP
+number_of_tiles rnd(220,400)
+number_of_clumps rnd(15,30)
+elseif MEDIUM_MAP
+number_of_tiles rnd(200,300)
+number_of_clumps rnd(12,20)
+elseif SMALL_MAP
+number_of_tiles rnd(150,250)
+number_of_clumps rnd(10,18)
+elseif TINY_MAP
+number_of_tiles rnd(120,200)
+number_of_clumps rnd(8,15)
+endif
+terrain_mask 1
+clumping_factor rnd(15,24)
+}
+create_terrain SNOW
+{
+base_terrain MAINLAND
+if GIGANTIC_MAP
+number_of_tiles rnd(300,500)
+number_of_clumps rnd(20,35)
+elseif HUGE_MAP
+number_of_tiles rnd(300,500)
+number_of_clumps rnd(20,35)
+elseif LARGE_MAP
+number_of_tiles rnd(220,400)
+number_of_clumps rnd(15,30)
+elseif MEDIUM_MAP
+number_of_tiles rnd(200,300)
+number_of_clumps rnd(12,20)
+elseif SMALL_MAP
+number_of_tiles rnd(150,250)
+number_of_clumps rnd(10,18)
+elseif TINY_MAP
+number_of_tiles rnd(120,200)
+number_of_clumps rnd(8,15)
+endif
+terrain_mask 1
+height_limits 3 7
+clumping_factor rnd(15,24)
+}
+create_terrain SHALLOW
+{
+base_terrain DLC_MANGROVESHALLOW
+if GIGANTIC_MAP
+number_of_tiles rnd(100,200)
+number_of_clumps rnd(20,30)
+elseif HUGE_MAP
+number_of_tiles rnd(100,200)
+number_of_clumps rnd(20,30)
+elseif LARGE_MAP
+number_of_tiles rnd(80,150)
+number_of_clumps rnd(15,25)
+elseif MEDIUM_MAP
+number_of_tiles rnd(65,120)
+number_of_clumps rnd(12,18)
+elseif SMALL_MAP
+number_of_tiles rnd(50,100)
+number_of_clumps rnd(10,15)
+elseif TINY_MAP
+number_of_tiles rnd(40,80)
+number_of_clumps rnd(8,12)
+endif
+terrain_mask 1
+}
+
+
+/* forest mixing */
+create_terrain JUNGLE
+{
+base_terrain DLC_RAINFOREST
+if GIGANTIC_MAP
+number_of_tiles rnd(120,200)
+number_of_clumps rnd(30,50)
+elseif HUGE_MAP
+number_of_tiles rnd(120,200)
+number_of_clumps rnd(30,50)
+elseif LARGE_MAP
+number_of_tiles rnd(100,150)
+number_of_clumps rnd(25,40)
+elseif MEDIUM_MAP
+number_of_tiles rnd(80,120)
+number_of_clumps rnd(20,35)
+elseif SMALL_MAP
+number_of_tiles rnd(60,100)
+number_of_clumps rnd(15,25)
+elseif TINY_MAP
+number_of_tiles rnd(50,80)
+number_of_clumps rnd(12,20)
+endif
+}
+create_terrain JUNGLE
+{
+base_terrain DLC_RAINFOREST
+if GIGANTIC_MAP
+number_of_tiles rnd(80,100)
+number_of_clumps rnd(50,70)
+elseif HUGE_MAP
+number_of_tiles rnd(80,100)
+number_of_clumps rnd(50,70)
+elseif LARGE_MAP
+number_of_tiles rnd(60,80)
+number_of_clumps rnd(40,60)
+elseif MEDIUM_MAP
+number_of_tiles rnd(50,70)
+number_of_clumps rnd(30,45)
+elseif SMALL_MAP
+number_of_tiles rnd(40,50)
+number_of_clumps rnd(25,35)
+elseif TINY_MAP
+number_of_tiles rnd(30,40)
+number_of_clumps rnd(20,30)
+endif
+}
+create_terrain DLC_RAINFOREST
+{
+base_terrain JUNGLE
+if GIGANTIC_MAP
+number_of_tiles rnd(80,100)
+number_of_clumps rnd(50,70)
+elseif HUGE_MAP
+number_of_tiles rnd(80,100)
+number_of_clumps rnd(50,70)
+elseif LARGE_MAP
+number_of_tiles rnd(60,80)
+number_of_clumps rnd(40,60)
+elseif MEDIUM_MAP
+number_of_tiles rnd(50,70)
+number_of_clumps rnd(30,45)
+elseif SMALL_MAP
+number_of_tiles rnd(40,50)
+number_of_clumps rnd(25,35)
+elseif TINY_MAP
+number_of_tiles rnd(30,40)
+number_of_clumps rnd(20,30)
+endif
+}
+create_terrain SNOW_FOREST
+{
+base_terrain PINE_FOREST
+if GIGANTIC_MAP
+number_of_tiles rnd(50,70)
+number_of_clumps rnd(20,40)
+elseif HUGE_MAP
+number_of_tiles rnd(50,70)
+number_of_clumps rnd(20,40)
+elseif LARGE_MAP
+number_of_tiles rnd(40,60)
+number_of_clumps rnd(15,30)
+elseif MEDIUM_MAP
+number_of_tiles rnd(30,45)
+number_of_clumps rnd(12,25)
+elseif SMALL_MAP
+number_of_tiles rnd(25,35)
+number_of_clumps rnd(10,20)
+elseif TINY_MAP
+number_of_tiles rnd(20,30)
+number_of_clumps rnd(8,15)
+endif
+terrain_mask 1
+}
+create_terrain DLC_FORESTAUTUMN
+{
+base_terrain FOREST
+if GIGANTIC_MAP
+number_of_tiles rnd(180,300)
+number_of_clumps rnd(50,70)
+elseif HUGE_MAP
+number_of_tiles rnd(180,300)
+number_of_clumps rnd(50,70)
+elseif LARGE_MAP
+number_of_tiles rnd(150,250)
+number_of_clumps rnd(40,60)
+elseif MEDIUM_MAP
+number_of_tiles rnd(120,200)
+number_of_clumps rnd(30,45)
+elseif SMALL_MAP
+number_of_tiles rnd(90,150)
+number_of_clumps rnd(25,35)
+elseif TINY_MAP
+number_of_tiles rnd(80,120)
+number_of_clumps rnd(20,30)
+endif
+}
+create_terrain PINE_FOREST
+{
+base_terrain FOREST
+if GIGANTIC_MAP
+number_of_tiles rnd(180,300)
+number_of_clumps rnd(50,70)
+elseif HUGE_MAP
+number_of_tiles rnd(180,300)
+number_of_clumps rnd(50,70)
+elseif LARGE_MAP
+number_of_tiles rnd(150,250)
+number_of_clumps rnd(40,60)
+elseif MEDIUM_MAP
+number_of_tiles rnd(120,200)
+number_of_clumps rnd(30,45)
+elseif SMALL_MAP
+number_of_tiles rnd(90,150)
+number_of_clumps rnd(25,35)
+elseif TINY_MAP
+number_of_tiles rnd(80,120)
+number_of_clumps rnd(20,30)
+endif
+}
+
+
+
+<OBJECTS_GENERATION>
+create_object HAWK
+{
+set_place_for_every_player
+min_distance_to_players 4
+max_distance_to_players 6
+}
+
+create_object TRANSPORT_SHIP
+{
+set_place_for_every_player
+max_distance_to_players 15
+find_closest
+avoid_forest_zone 3
+min_distance_to_map_edge 1
+}
+create_object TERRAIN_BLOCKER
+{
+terrain_to_place_on WATER
+number_of_objects 99999
+actor_area 50000
+actor_area_radius 3
+}
+create_object TERRAIN_BLOCKER
+{
+terrain_to_place_on MED_WATER
+number_of_objects 99999
+actor_area 50001
+actor_area_radius 3
+}
+create_object TERRAIN_BLOCKER
+{
+terrain_to_place_on DLC_BLACK
+number_of_objects 99999
+actor_area 50002
+actor_area_radius 5
+}
+create_object TERRAIN_BLOCKER
+{
+terrain_to_place_on DEEP_WATER
+number_of_objects 99999
+actor_area 50003
+if TINY_MAP
+actor_area_radius 2
+elseif SMALL_MAP
+actor_area_radius 2
+elseif MEDIUM_MAP
+actor_area_radius 2
+else
+actor_area_radius 3
+endif
+}
+create_object ROCK
+{
+terrain_to_place_on BEACH
+number_of_objects 99999
+actor_area_to_place_in 50002
+}
+create_object ROCK
+{
+terrain_to_place_on BEACH
+number_of_objects 99999
+actor_area_to_place_in 50003
+}
+create_object TERRAIN_BLOCKER
+{
+terrain_to_place_on DLC_MANGROVESHALLOW
+number_of_objects 99999
+actor_area 50004
+actor_area_radius 3
+}
+
+create_object VILLAGER
+{
+ignore_terrain_restrictions
+set_circular_placement
+set_place_for_every_player
+min_distance_to_players 10
+if GIGANTIC_MAP
+max_distance_to_players 150
+temp_min_distance_group_placement 30
+elseif HUGE_MAP
+max_distance_to_players 150
+temp_min_distance_group_placement 30
+elseif LARGE_MAP
+max_distance_to_players 120
+temp_min_distance_group_placement 28
+elseif MEDIUM_MAP
+max_distance_to_players 110
+temp_min_distance_group_placement 24
+elseif SMALL_MAP
+max_distance_to_players 100
+temp_min_distance_group_placement 22
+elseif TINY_MAP
+max_distance_to_players 90
+temp_min_distance_group_placement 20
+endif
+max_distance_to_other_zones 3
+avoid_forest_zone 2
+avoid_actor_area 50000
+avoid_actor_area 50001
+avoid_actor_area 50002
+avoid_actor_area 50003
+avoid_actor_area 50004
+min_distance_to_map_edge 10
+}
+if REGICIDE
+create_object KING
+{
+ignore_terrain_restrictions
+set_circular_placement
+set_place_for_every_player
+min_distance_to_players 10
+if GIGANTIC_MAP
+max_distance_to_players 150
+temp_min_distance_group_placement 30
+elseif HUGE_MAP
+max_distance_to_players 150
+temp_min_distance_group_placement 30
+elseif LARGE_MAP
+max_distance_to_players 120
+temp_min_distance_group_placement 28
+elseif MEDIUM_MAP
+max_distance_to_players 110
+temp_min_distance_group_placement 24
+elseif SMALL_MAP
+max_distance_to_players 100
+temp_min_distance_group_placement 22
+elseif TINY_MAP
+max_distance_to_players 90
+temp_min_distance_group_placement 20
+endif
+max_distance_to_other_zones 3
+avoid_forest_zone 2
+avoid_actor_area 50000
+avoid_actor_area 50001
+avoid_actor_area 50002
+avoid_actor_area 50003
+avoid_actor_area 50004
+min_distance_to_map_edge 10
+}
+else
+create_object HORSE
+{
+ignore_terrain_restrictions
+set_circular_placement
+set_place_for_every_player
+min_distance_to_players 10
+if GIGANTIC_MAP
+max_distance_to_players 150
+temp_min_distance_group_placement 30
+elseif HUGE_MAP
+max_distance_to_players 150
+temp_min_distance_group_placement 30
+elseif LARGE_MAP
+max_distance_to_players 120
+temp_min_distance_group_placement 28
+elseif MEDIUM_MAP
+max_distance_to_players 110
+temp_min_distance_group_placement 24
+elseif SMALL_MAP
+max_distance_to_players 100
+temp_min_distance_group_placement 22
+elseif TINY_MAP
+max_distance_to_players 90
+temp_min_distance_group_placement 20
+endif
+max_distance_to_other_zones 3
+avoid_forest_zone 2
+avoid_actor_area 50000
+avoid_actor_area 50001
+avoid_actor_area 50002
+avoid_actor_area 50003
+avoid_actor_area 50004
+min_distance_to_map_edge 10
+}
+
+create_object GOLD
+{
+number_of_objects rnd(4,6)
+group_variance rnd(0,2)
+number_of_groups 999
+set_tight_grouping
+group_placement_radius 2
+set_gaia_object_only
+temp_min_distance_group_placement rnd(35,50)
+min_distance_group_placement 5
+actor_area 10005
+actor_area_radius rnd(8,15)
+avoid_forest_zone 2
+max_distance_to_other_zones rnd(2,3)
+}
+create_object STONE
+{
+number_of_objects rnd(3,5)
+group_variance rnd(0,2)
+number_of_groups 999
+set_tight_grouping
+group_placement_radius 2
+set_gaia_object_only
+temp_min_distance_group_placement rnd(40,55)
+min_distance_group_placement 5
+actor_area 10006
+avoid_actor_area 10005
+actor_area_radius rnd(8,15)
+avoid_forest_zone 2
+max_distance_to_other_zones rnd(2,3)
+}
+create_object GOLD
+{
+number_of_objects rnd(4,6)
+group_variance rnd(0,2)
+number_of_groups 1
+set_scaling_to_map_size
+set_tight_grouping
+group_placement_radius 2
+set_gaia_object_only
+temp_min_distance_group_placement rnd(18,30)
+min_distance_group_placement 5
+actor_area 100051
+avoid_actor_area 10005
+avoid_actor_area 10006
+actor_area_radius rnd(8,15)
+avoid_forest_zone 2
+max_distance_to_other_zones rnd(1,2)
+}
+create_object STONE
+{
+number_of_objects rnd(3,5)
+group_variance rnd(0,2)
+number_of_groups 1
+set_scaling_to_map_size
+set_tight_grouping
+group_placement_radius 2
+set_gaia_object_only
+temp_min_distance_group_placement rnd(20,25)
+min_distance_group_placement 5
+actor_area 100061
+avoid_actor_area 10005
+avoid_actor_area 100051
+avoid_actor_area 100061
+actor_area_radius rnd(8,15)
+avoid_forest_zone 2
+max_distance_to_other_zones rnd(1,2)
+}
+
+
+create_object FORAGE
+{
+number_of_objects rnd(5,6)
+group_variance rnd(0,2)
+number_of_groups 999
+set_tight_grouping
+group_placement_radius 2
+set_gaia_object_only
+temp_min_distance_group_placement rnd(20,30)
+actor_area 10007
+actor_area_radius rnd(8,11)
+avoid_forest_zone 3
+max_distance_to_other_zones 3
+}
+
+/* stragglers */
+
+create_object OAKTREE
+{
+terrain_to_place_on MAINLAND
+temp_min_distance_group_placement rnd(12,18)
+number_of_groups 4
+set_scaling_to_map_size
+group_placement_radius 1
+min_distance_group_placement 4
+}
+
+create_object OAKTREE
+{
+terrain_to_place_on MAINLAND
+if GIGANTIC_MAP
+number_of_objects rnd(30,40)
+elseif HUGE_MAP
+number_of_objects rnd(20,30)
+elseif LARGE_MAP
+number_of_objects rnd(15,25)
+elseif MEDIUM_MAP
+number_of_objects rnd(10,20)
+elseif SMALL_MAP
+number_of_objects rnd(8,15)
+elseif TINY_MAP
+number_of_objects rnd(5,10)
+endif
+}
+
+
+create_object SMALL_HUNT
+{
+number_of_objects 3
+group_variance rnd(0,1)
+number_of_groups 999
+set_loose_grouping
+group_placement_radius 3
+set_gaia_object_only
+temp_min_distance_group_placement rnd(20,30)
+avoid_actor_area 10007
+avoid_forest_zone 3
+max_distance_to_other_zones 3
+}
+
+create_object LARGE_HUNT
+{
+number_of_objects 1
+number_of_groups 999
+set_loose_grouping
+group_placement_radius 2
+set_gaia_object_only
+temp_min_distance_group_placement rnd(18,30)
+avoid_forest_zone 2
+max_distance_to_other_zones 2
+}
+
+create_object HERDABLE
+{
+number_of_objects 1
+number_of_groups 999
+set_loose_grouping
+group_placement_radius 2
+set_gaia_object_only
+temp_min_distance_group_placement rnd(15,20)
+avoid_forest_zone 2
+max_distance_to_other_zones 1
+}
+
+create_object RELIC
+{
+if GIGANTIC_MAP
+number_of_objects rnd(10,20)
+temp_min_distance_group_placement rnd(25,35)
+elseif HUGE_MAP
+number_of_objects rnd(8,15)
+temp_min_distance_group_placement rnd(23,30)
+elseif LARGE_MAP
+number_of_objects rnd(7,12)
+temp_min_distance_group_placement rnd(21,29)
+elseif MEDIUM_MAP
+number_of_objects rnd(6,9)
+temp_min_distance_group_placement rnd(20,28)
+elseif SMALL_MAP
+number_of_objects rnd(5,8)
+temp_min_distance_group_placement rnd(19,26)
+elseif TINY_MAP
+number_of_objects rnd(5,7)
+temp_min_distance_group_placement rnd(18,25)
+endif
+set_gaia_object_only
+avoid_forest_zone 2
+max_distance_to_other_zones 1
+}
+
+
+
+/* fish */
+create_object BIG_FISH
+{
+max_distance_to_other_zones 3
+temp_min_distance_group_placement rnd(9,11)
+min_distance_group_placement rnd(2,5)
+number_of_objects 999
+set_gaia_object_only
+}
+create_object BIG_FISH2
+{
+max_distance_to_other_zones 4
+temp_min_distance_group_placement 5
+if GIGANTIC_MAP
+number_of_objects rnd(20,60)
+elseif HUGE_MAP
+number_of_objects rnd(17,50)
+elseif LARGE_MAP
+number_of_objects rnd(13,40)
+elseif MEDIUM_MAP
+number_of_objects rnd(10,30)
+elseif SMALL_MAP
+number_of_objects rnd(7,20)
+elseif TINY_MAP
+number_of_objects rnd(5,15)
+endif
+set_gaia_object_only
+min_distance_group_placement 5
+}
+create_object SHORE_FISH
+{
+temp_min_distance_group_placement rnd(9,11)
+min_distance_group_placement rnd(2,4)
+number_of_objects 999
+set_gaia_object_only
+terrain_to_place_on WATER
+}
+create_object DLC_BOXTURTLE
+{
+temp_min_distance_group_placement 5
+if GIGANTIC_MAP
+number_of_objects rnd(15,30)
+elseif HUGE_MAP
+number_of_objects rnd(12,24)
+elseif LARGE_MAP
+number_of_objects rnd(10,20)
+elseif MEDIUM_MAP
+number_of_objects rnd(8,16)
+elseif SMALL_MAP
+number_of_objects rnd(7,15)
+elseif TINY_MAP
+number_of_objects rnd(6,12)
+endif
+set_gaia_object_only
+terrain_to_place_on WATER
+}
+create_object BIRD
+{
+temp_min_distance_group_placement 5
+if GIGANTIC_MAP
+number_of_objects rnd(25,35)
+elseif HUGE_MAP
+number_of_objects rnd(20,30)
+elseif LARGE_MAP
+number_of_objects rnd(15,22)
+elseif MEDIUM_MAP
+number_of_objects rnd(12,17)
+elseif SMALL_MAP
+number_of_objects rnd(10,14)
+elseif TINY_MAP
+number_of_objects rnd(7,12)
+endif
+set_gaia_object_only
+}
